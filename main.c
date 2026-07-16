@@ -1,9 +1,19 @@
 #include "agenda.h"
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 
 int main(){
+    // Força UTF-8
+    #ifdef _WIN32
+        SetConsoleOutputCP(CP_UTF8);
+    #endif
     struct prova *provas = NULL;
     int quant_provas = 0;
+    int option = -1;
     FILE *arquivo;
+    //Carga do arquivo .txt
     arquivo = fopen("agenda.txt","rt");
     if(arquivo == NULL){
         printf("\nErro ao ler agenda.\n");
@@ -45,6 +55,55 @@ int main(){
             fclose(arquivo);
             printf("\nAgenda de provas vazia.\nInicializando. . .\n");
             system("pause");
+        }
+    }
+    //Menu seletor
+    while(option != 0){
+        system("cls");
+        printf("┌──────────────────────────────────────────────┐\n");
+        printf("│           Agenda de Provas by João           │\n");
+        printf("├──────────────────────────────────────────────┤\n");
+        printf("│  1. Cadastrar Nova Prova                     │\n");
+        printf("│  2. Visualizar Provas Agendadas              │\n");
+        printf("│  3. Remover Prova                            │\n");
+        printf("│  4. Pesquisar por Data                       │\n");
+        printf("│  5. Pesquisar por Descrição                  │\n");
+        printf("│  0. Sair do Programa                         │\n");
+        printf("└──────────────────────────────────────────────┘\n");
+        printf("\n-> ");
+        if(scanf("%d",&option) != 1){
+            printf("\nEntrada inválida, use números.\n");
+            int c; //limpando o buffer
+            while ((c = getchar()) != '\n' && c != EOF);
+            system("pause");
+            continue;
+        }
+        //início do switch case
+        switch (option)
+        {
+        case 1:
+            break;
+
+        case 2:
+            break;
+
+        case 3:
+            break;
+        
+        case 4:
+            break;
+        
+        case 5:
+            break;
+
+        case 0:
+            break;
+        
+        default:
+            printf("\nOpção inválida.\n");
+            system("pause");
+            continue;
+            break;
         }
     }
     return 0;
