@@ -18,3 +18,4 @@ struct prova{
     char local[50];
 };
 
+void salva_arquivo(FILE *arquivo,struct prova **provas, int n);

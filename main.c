@@ -5,7 +5,7 @@
 
 
 int main(){
-    // Força UTF-8
+    // Forçando UTF-8
     #ifdef _WIN32
         SetConsoleOutputCP(CP_UTF8);
     #endif
@@ -97,6 +97,19 @@ int main(){
             break;
 
         case 0:
+            printf("\nEncerrando o programa\n");
+            Sleep(200);
+            printf(".");
+            Sleep(200);
+            printf(" .");
+            Sleep(200);
+            printf(" .");
+            arquivo = fopen("agenda.txt","wt");
+            salva_arquivo(arquivo,&provas,quant_provas);
+            fclose(arquivo);
+            Sleep(200);
+            printf("\nAté logo!");
+            Sleep(1000);
             break;
         
         default:
