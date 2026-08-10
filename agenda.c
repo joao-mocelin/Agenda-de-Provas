@@ -27,6 +27,19 @@ struct prova *cadastra_prova(struct prova *agenda, int *quantidade_provas){
     }
     while(check_data(copia.data) != 0);
 
+    do{
+        printf("\nInsira o horário de início no formato (23 59):\n");
+        scanf("%d %d",&copia.horario_ini.hora,&copia.horario_ini.minuto);
+        printf("\nInsira o horário de término no formato (23 59):\n");
+        scanf("%d %d",&copia.horario_fim.hora,&copia.horario_fim.minuto);
+    }
+    while(valida_horario(copia.horario_ini) != 0 || valida_horario(copia.horario_fim) != 0 || compara_horario(copia.horario_ini, copia.horario_fim) != 0);
+
+    printf("\nInsira a descrição da prova:\n");
+    scanf(" %50[^\n]",copia.desc);
+
+    printf("\nInsira o local da prova:\n");
+    scanf(" %50[^\n]",copia.local);
 }
 
 int check_data(struct data data_a_checar){ //return 1 == Invalid data; return 0 == valid data
@@ -50,13 +63,23 @@ int check_data(struct data data_a_checar){ //return 1 == Invalid data; return 0 
     return 0;
 }
 
-int valida_horario(struct horario hora_a_checar){
+int valida_horario(struct horario hora_a_checar){ //return 1 == Invalid horario; return 0 == valid horario
     if(hora_a_checar.hora > 23 || hora_a_checar.hora < 0){
         printf("\nHorário inválido!");
         return 1;
     }
     if(hora_a_checar.minuto > 59 || hora_a_checar.minuto < 0){
         printf("\nHorário inválido!");
+        return 1;
+    }
+    return 0;
+}
+
+int compara_horario(struct horario hora_ini, struct horario hora_fim){//return 1 == inválido; return 0 == valido
+    int horario_ini = (hora_ini.hora * 60) + hora_ini.minuto;
+    int horario_fim = (hora_fim.hora * 60) + hora_fim.minuto;
+    if(horario_ini >= horario_fim){
+        printf("\nO horário de término deve ser após o horário de início!");
         return 1;
     }
     return 0;

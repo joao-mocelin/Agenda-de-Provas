@@ -23,3 +23,4 @@ struct prova *cadastra_prova(struct prova *agenda, int quantidade_provas);
 
 int check_data(struct data data_a_checar);
 int valida_horario(struct horario hora_a_checar);
+int compara_horario(struct horario hora_ini, struct horario hora_fim);
