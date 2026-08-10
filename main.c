@@ -82,6 +82,7 @@ int main(){
         switch (option)
         {
         case 1:
+            provas = cadastra_prova(provas,quant_provas);
             break;
 
         case 2:
