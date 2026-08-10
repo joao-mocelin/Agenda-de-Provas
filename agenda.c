@@ -33,7 +33,7 @@ struct prova *cadastra_prova(struct prova *agenda, int *quantidade_provas){
         printf("\nInsira o horário de término no formato (23 59):\n");
         scanf("%d %d",&copia.horario_fim.hora,&copia.horario_fim.minuto);
     }
-    while(valida_horario(copia.horario_ini) != 0 || valida_horario(copia.horario_fim) != 0 || compara_horario(copia.horario_ini, copia.horario_fim) != 0);
+    while(valida_horario(copia.horario_ini) != 0 || valida_horario(copia.horario_fim) != 0 || compara_horario(copia.horario_ini, copia.horario_fim) != 0 || sobrepoe_horario(agenda,*quantidade_provas,copia));
 
     printf("\nInsira a descrição da prova:\n");
     scanf(" %50[^\n]",copia.desc);
@@ -83,4 +83,24 @@ int compara_horario(struct horario hora_ini, struct horario hora_fim){//return 1
         return 1;
     }
     return 0;
+}
+
+int sobrepoe_horario(struct prova *agenda, int n_provas, struct prova prova_nova){ //return 1 == conflito; return 0 == sem conflito
+    int prova_nova_ini = (prova_nova.horario_ini.hora * 60) + prova_nova.horario_ini.minuto;
+    int prova_nova_fim = (prova_nova.horario_fim.hora * 60) + prova_nova.horario_fim.minuto;
+    for(int i = 0; i < n_provas; i++){
+        if(agenda[i].data.dia == prova_nova.data.dia &&
+            agenda[i].data.mes == prova_nova.data.mes &&
+            agenda[i].data.ano == prova_nova.data.ano){
+
+            int prova_compara_ini = (agenda[i].horario_ini.hora * 60) + agenda[i].horario_ini.minuto;
+            int prova_compara_fim = (agenda[i].horario_fim.hora * 60) + agenda[i].horario_fim.minuto;
+
+            if(prova_nova_ini < prova_compara_fim && prova_compara_ini < prova_nova_fim){
+                printf("\nHorário em conflito com outra prova já cadastrada no mesmo dia!");
+                return 1; // tem conflito
+            }
+        }
+    }
+    return 0; //nao tem conflito
 }
