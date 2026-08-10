@@ -15,14 +15,17 @@ void salva_arquivo(FILE *arquivo,struct prova **provas, int n){
     }
 }
 
-struct prova *cadastra_prova(struct prova *agenda, int quantidade_provas){
+struct prova *cadastra_prova(struct prova *agenda, int *quantidade_provas){
     struct prova copia;
-    printf("\nInsira o dia:\n");
-    scanf("%d",&copia.data.dia);
-    printf("\nInsira o mês:\n");
-    scanf("%d",&copia.data.mes);
-    printf("\nInsira o ano:\n");
-    scanf("%d",&copia.data.ano);
+    do{
+        printf("\nInsira o dia:\n");
+        scanf("%d",&copia.data.dia);
+        printf("\nInsira o mês:\n");
+        scanf("%d",&copia.data.mes);
+        printf("\nInsira o ano:\n");
+        scanf("%d",&copia.data.ano);
+    }
+    while(check_data(copia.data) != 0);
 
 }
 
@@ -42,6 +45,18 @@ int check_data(struct data data_a_checar){ //return 1 == Invalid data; return 0 
     int max_dias = mes[data_a_checar.mes - 1];
     if(data_a_checar.dia < 1 || data_a_checar.dia > max_dias){
         printf("\nDia inválido!");
+        return 1;
+    }
+    return 0;
+}
+
+int valida_horario(struct horario hora_a_checar){
+    if(hora_a_checar.hora > 23 || hora_a_checar.hora < 0){
+        printf("\nHorário inválido!");
+        return 1;
+    }
+    if(hora_a_checar.minuto > 59 || hora_a_checar.minuto < 0){
+        printf("\nHorário inválido!");
         return 1;
     }
     return 0;
