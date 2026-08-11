@@ -106,7 +106,7 @@ int main(){
             Sleep(200);
             printf(" .");
             arquivo = fopen("agenda.txt","wt");
-            salva_arquivo(arquivo,&provas,quant_provas);
+            salva_arquivo(arquivo,provas,quant_provas);
             fclose(arquivo);
             Sleep(200);
             printf("\nAté logo!");

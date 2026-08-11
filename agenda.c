@@ -1,17 +1,17 @@
 #include "agenda.h"
 
-void salva_arquivo(FILE *arquivo,struct prova **provas, int n){
+void salva_arquivo(FILE *arquivo,struct prova *provas, int n){
     if(arquivo == NULL){
         printf("\nErro ao salvar arquivo!");
         return;
     }
     fprintf(arquivo,"%d\n",n);
     for(int i = 0; i < n; i++){
-        fprintf(arquivo,"%d %d %d\n",provas[i]->data.ano,provas[i]->data.mes,provas[i]->data.dia);
-        fprintf(arquivo,"%d %d\n",provas[i]->horario_ini.hora,provas[i]->horario_ini.minuto);
-        fprintf(arquivo,"%d %d\n",provas[i]->horario_fim.hora,provas[i]->horario_fim.minuto);
-        fprintf(arquivo,"%s\n",provas[i]->desc);
-        fprintf(arquivo,"%s\n",provas[i]->local);
+        fprintf(arquivo,"%d %d %d\n",provas[i].data.ano,provas[i].data.mes,provas[i].data.dia);
+        fprintf(arquivo,"%d %d\n",provas[i].horario_ini.hora,provas[i].horario_ini.minuto);
+        fprintf(arquivo,"%d %d\n",provas[i].horario_fim.hora,provas[i].horario_fim.minuto);
+        fprintf(arquivo,"%s\n",provas[i].desc);
+        fprintf(arquivo,"%s\n",provas[i].local);
     }
 }
 
@@ -36,10 +36,24 @@ struct prova *cadastra_prova(struct prova *agenda, int *quantidade_provas){
     while(valida_horario(copia.horario_ini) != 0 || valida_horario(copia.horario_fim) != 0 || compara_horario(copia.horario_ini, copia.horario_fim) != 0 || sobrepoe_horario(agenda,*quantidade_provas,copia));
 
     printf("\nInsira a descrição da prova:\n");
-    scanf(" %50[^\n]",copia.desc);
+    scanf(" %49[^\n]",copia.desc);
 
     printf("\nInsira o local da prova:\n");
-    scanf(" %50[^\n]",copia.local);
+    scanf(" %49[^\n]",copia.local);
+
+    (*quantidade_provas) += 1;
+    struct prova *temp = realloc(agenda,sizeof(struct prova) * (*quantidade_provas));
+    if(temp == NULL){
+        (*quantidade_provas) -= 1;
+        printf("\nFalha ao alocar memória!");
+        return agenda;
+    }
+    agenda = temp;
+    int i = (*quantidade_provas) - 1;
+    agenda[i] = copia;
+    printf("\nProva cadastrada com sucesso.\n");
+    system("pause");
+    return agenda;
 }
 
 int check_data(struct data data_a_checar){ //return 1 == Invalid data; return 0 == valid data
