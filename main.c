@@ -38,8 +38,8 @@ int main(){
                 fscanf(arquivo, "%d %d %d\n", &provas[i].data.dia, &provas[i].data.mes, &provas[i].data.ano);
                 fscanf(arquivo, "%d %d\n", &provas[i].horario_ini.hora, &provas[i].horario_ini.minuto);
                 fscanf(arquivo, "%d %d\n", &provas[i].horario_fim.hora, &provas[i].horario_fim.minuto);
-                fscanf(arquivo, "%50[^\n]\n", provas[i].desc);
-                fscanf(arquivo, "%50[^\n]\n", provas[i].local);
+                fscanf(arquivo, "%149[^\n]\n", provas[i].desc);
+                fscanf(arquivo, "%49[^\n]\n", provas[i].local);
             }
             fclose(arquivo);
             if(quant_provas == 1){

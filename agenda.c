@@ -36,11 +36,11 @@ struct prova *cadastra_prova(struct prova *agenda, int *quantidade_provas){
     while(valida_horario(copia.horario_ini) != 0 || valida_horario(copia.horario_fim) != 0 || compara_horario(copia.horario_ini, copia.horario_fim) != 0 || sobrepoe_horario(agenda,*quantidade_provas,copia));
 
     printf("\nInsira a descrição da prova:\n");
-    scanf(" %49[^\n]",copia.desc);
-
+    scanf(" %149[^\n]",copia.desc);
+    limpa_buffer();
     printf("\nInsira o local da prova:\n");
     scanf(" %49[^\n]",copia.local);
-
+    limpa_buffer();
     (*quantidade_provas) += 1;
     struct prova *temp = realloc(agenda,sizeof(struct prova) * (*quantidade_provas));
     if(temp == NULL){
@@ -117,4 +117,9 @@ int sobrepoe_horario(struct prova *agenda, int n_provas, struct prova prova_nova
         }
     }
     return 0; //nao tem conflito
+}
+
+void limpa_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }

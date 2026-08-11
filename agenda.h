@@ -14,7 +14,7 @@ struct prova{
     struct data data;
     struct horario horario_ini;
     struct horario horario_fim;
-    char desc[50];
+    char desc[150];
     char local[50];
 };
 
@@ -25,3 +25,4 @@ int check_data(struct data data_a_checar);
 int valida_horario(struct horario hora_a_checar);
 int compara_horario(struct horario hora_ini, struct horario hora_fim);
 int sobrepoe_horario(struct prova *agenda, int n_provas, struct prova prova_nova);
+void limpa_buffer();
