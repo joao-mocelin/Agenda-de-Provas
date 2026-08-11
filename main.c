@@ -81,6 +81,7 @@ int main(){
         switch (option)
         {
         case 1:
+            printf("\nCadastro de Prova.\n");
             provas = cadastra_prova(provas,&quant_provas);
             break;
 
