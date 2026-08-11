@@ -73,8 +73,7 @@ int main(){
         printf("\n-> ");
         if(scanf("%d",&option) != 1){
             printf("\nEntrada inválida, use números.\n");
-            int c; //limpando o buffer
-            while ((c = getchar()) != '\n' && c != EOF);
+            limpa_buffer();
             system("pause");
             continue;
         }
