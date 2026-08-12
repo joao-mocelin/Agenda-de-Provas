@@ -86,6 +86,15 @@ int main(){
             break;
 
         case 2:
+            if(quant_provas == 1){
+                printf("\n%d Prova Cadastradas:\n",quant_provas);
+            }
+            else{
+                printf("\n%d Provas Cadastradas:\n",quant_provas);
+            }
+            mostra_provas(provas,quant_provas);
+            printf("\n");
+            system("pause");
             break;
 
         case 3:

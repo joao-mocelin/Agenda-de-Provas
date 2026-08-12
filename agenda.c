@@ -123,3 +123,13 @@ void limpa_buffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
+
+void mostra_provas(struct prova *agenda, int quantidade_provas){
+    for(int i = 0; i < quantidade_provas; i++){
+        printf("\nData: %02d %02d %02d",agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano);
+        printf("\nHorário de início: %02d %02d",agenda[i].horario_ini.hora,agenda[i].horario_ini.minuto);
+        printf("\nHorário de término: %02d %02d",agenda[i].horario_fim.hora,agenda[i].horario_fim.minuto);
+        printf("\nDescrição: %s",agenda[i].desc);
+        printf("\nLocal: %s\n",agenda[i].local);
+    }
+}
