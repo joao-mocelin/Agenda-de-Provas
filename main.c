@@ -98,6 +98,8 @@ int main(){
             break;
 
         case 3:
+            printf("\nRemoção de Prova.\n");
+            provas = remover_prova(provas, &quant_provas);
             break;
         
         case 4:

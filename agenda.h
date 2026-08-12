@@ -21,6 +21,7 @@ struct prova{
 void salva_arquivo(FILE *arquivo,struct prova *provas, int n);
 struct prova *cadastra_prova(struct prova *agenda, int *quantidade_provas);
 void mostra_provas(struct prova *agenda, int quantidade_provas);
+struct prova *remover_prova(struct prova *agenda, int *quantidade_provas);
 
 
 int check_data(struct data data_a_checar);

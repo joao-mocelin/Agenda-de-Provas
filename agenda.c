@@ -130,10 +130,48 @@ void mostra_provas(struct prova *agenda, int quantidade_provas){
         return;
     }
     for(int i = 0; i < quantidade_provas; i++){
-        printf("\nData: %02d %02d %02d",agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano);
-        printf("\nHorário de início: %02d %02d",agenda[i].horario_ini.hora,agenda[i].horario_ini.minuto);
-        printf("\nHorário de término: %02d %02d",agenda[i].horario_fim.hora,agenda[i].horario_fim.minuto);
-        printf("\nDescrição: %s",agenda[i].desc);
-        printf("\nLocal: %s\n",agenda[i].local);
+        printf("\n%d Data: %02d %02d %02d", i + 1, agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano);
+        printf("\n  Horário de início: %02d %02d",agenda[i].horario_ini.hora,agenda[i].horario_ini.minuto);
+        printf("\n  Horário de término: %02d %02d",agenda[i].horario_fim.hora,agenda[i].horario_fim.minuto);
+        printf("\n  Descrição: %s",agenda[i].desc);
+        printf("\n  Local: %s\n",agenda[i].local);
     }
+}
+
+struct prova *remover_prova(struct prova *agenda, int *quantidade_provas){
+    int index_prova;
+    if(agenda == NULL || quantidade_provas == NULL){
+        printf("\nAgenda vazia, impossível remover elementos!");
+        return NULL;
+    }
+    mostra_provas(agenda,*quantidade_provas);
+    do{
+        printf("\nDigite o número correspondente à prova que deseja remover ou 0 para cancelar:\n-> ");
+        scanf("%d",&index_prova);
+        limpa_buffer();
+    }while(index_prova < 0 || index_prova > *quantidade_provas);
+    if(index_prova == 0){
+        printf("\nRemoção de prova cancelada!\n");
+        system("pause");
+        return agenda;
+    }
+    index_prova -= 1;
+    for(index_prova; index_prova < (*quantidade_provas) - 1; index_prova++){
+        agenda[index_prova] = agenda[index_prova + 1];
+    }
+    (*quantidade_provas) -= 1;
+    if(*quantidade_provas == 0){
+        free(agenda);
+        printf("\nProva removida com sucesso.\n");
+        system("pause");
+        return NULL;
+    }
+    struct prova *copia = realloc(agenda, sizeof(struct prova) * (*quantidade_provas));
+    if(copia == NULL){
+        printf("\nFalha ao alocar memória!");
+        return agenda;
+    }
+    printf("\nProva removida com sucesso.\n");
+    system("pause");
+    return copia;
 }
