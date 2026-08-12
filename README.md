@@ -48,19 +48,20 @@ Pré-requisitos
 Ter um compilador C instalado (como o GCC).
 
 Compilando via Terminal (GCC)
+```bash
 # Clone o repositório ou baixe os arquivos
-git clone [https://github.com/seu-usuario/agenda-de-provas.git](https://github.com/seu-usuario/agenda-de-provas.git)
+git clone https://github.com/seu-usuario/agenda-de-provas.git
 cd agenda-de-provas
 
 # Compile o projeto
 gcc main.c agenda.c -o agenda
 
-# Execute o programa
-# No Windows:
+# Execute o programa (No Windows)
 agenda.exe
 
-# No Linux/macOS:
+# Execute o programa (No Linux/macOS)
 ./agenda
+```
 
 ---
 
