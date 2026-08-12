@@ -125,6 +125,10 @@ void limpa_buffer() {
 }
 
 void mostra_provas(struct prova *agenda, int quantidade_provas){
+    if(quantidade_provas <= 0){
+        printf("\nNão há provas agendadas.\n");
+        return;
+    }
     for(int i = 0; i < quantidade_provas; i++){
         printf("\nData: %02d %02d %02d",agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano);
         printf("\nHorário de início: %02d %02d",agenda[i].horario_ini.hora,agenda[i].horario_ini.minuto);
