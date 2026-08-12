@@ -1,3 +1,5 @@
+#ifndef AGENDA_H
+#define AGENDA_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -33,3 +35,5 @@ int sobrepoe_horario(struct prova *agenda, int n_provas, struct prova prova_nova
 void limpa_buffer();
 char* to_lower(char *str);
 void ordena_agenda(struct prova *agenda, int quantidade_provas);
+
+#endif

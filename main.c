@@ -117,10 +117,17 @@ int main(){
         case 0:
             printf("\nEncerrando o programa\n");
             arquivo = fopen("agenda.txt","wt");
-            salva_arquivo(arquivo,provas,quant_provas);
-            fclose(arquivo);
-            Sleep(200);
-            printf("\nAté logo!");
+            if(arquivo != NULL){
+                salva_arquivo(arquivo, provas, quant_provas);
+                fclose(arquivo);
+            }
+            else{
+                printf("\nErro ao abrir arquivo para escrita!\n");
+            }
+
+            if(provas != NULL){
+                free(provas);
+            }
             break;
         
         default:

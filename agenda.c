@@ -1,10 +1,6 @@
 ﻿#include "agenda.h"
 
 void salva_arquivo(FILE *arquivo,struct prova *provas, int n){
-    if(arquivo == NULL){
-        printf("\nErro ao salvar arquivo!");
-        return;
-    }
     fprintf(arquivo,"%d\n",n);
     for(int i = 0; i < n; i++){
         fprintf(arquivo,"%d %d %d\n",provas[i].data.dia,provas[i].data.mes,provas[i].data.ano);
@@ -20,10 +16,13 @@ struct prova *cadastra_prova(struct prova *agenda, int *quantidade_provas){
     do{
         printf("\nInsira o dia:\n");
         scanf("%d",&copia.data.dia);
+        limpa_buffer();
         printf("\nInsira o mês:\n");
         scanf("%d",&copia.data.mes);
+        limpa_buffer();
         printf("\nInsira o ano:\n");
         scanf("%d",&copia.data.ano);
+        limpa_buffer();
     }
     while(check_data(copia.data) != 0);
 
@@ -265,7 +264,11 @@ void ordena_agenda(struct prova *agenda, int quantidade_provas){
         int menor_idx = i;
 
         for(int j = i + 1; j < quantidade_provas; j++){
-            if(agenda[i].data.ano > agenda[j].data.ano || (agenda[i].data.ano == agenda[j].data.ano && agenda[i].data.mes > agenda[j].data.mes) || (agenda[i].data.ano == agenda[j].data.ano && agenda[i].data.mes == agenda[j].data.mes && agenda[i].data.dia > agenda[j].data.dia) || (compara_data(agenda[i].data,agenda[j].data) == 1 && agenda[i].horario_ini.hora > agenda[j].horario_ini.hora) || (compara_data(agenda[i].data,agenda[j].data) == 1 && agenda[i].horario_ini.hora == agenda[j].horario_ini.hora && agenda[i].horario_ini.minuto > agenda[j].horario_ini.minuto)){
+            if (agenda[menor_idx].data.ano > agenda[j].data.ano || 
+            (agenda[menor_idx].data.ano == agenda[j].data.ano && agenda[menor_idx].data.mes > agenda[j].data.mes) ||
+            (agenda[menor_idx].data.ano == agenda[j].data.ano && agenda[menor_idx].data.mes == agenda[j].data.mes && agenda[menor_idx].data.dia > agenda[j].data.dia) || 
+            (compara_data(agenda[menor_idx].data, agenda[j].data) == 1 && agenda[menor_idx].horario_ini.hora > agenda[j].horario_ini.hora) || 
+            (compara_data(agenda[menor_idx].data, agenda[j].data) == 1 && agenda[menor_idx].horario_ini.hora == agenda[j].horario_ini.hora && agenda[menor_idx].horario_ini.minuto > agenda[j].horario_ini.minuto)) {
                 menor_idx = j;
             }
         }
