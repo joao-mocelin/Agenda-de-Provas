@@ -50,6 +50,7 @@ int main(){
                 printf("\n%d Provas encontradas.\n",quant_provas);
                 system("pause");
             }
+            ordena_agenda(provas,quant_provas);
         }
         else{ //quant_provas == 0
             fclose(arquivo);
@@ -83,6 +84,7 @@ int main(){
         case 1:
             printf("\nCadastro de Prova.\n");
             provas = cadastra_prova(provas,&quant_provas);
+            ordena_agenda(provas,quant_provas);
             break;
 
         case 2:

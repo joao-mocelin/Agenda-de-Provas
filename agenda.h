@@ -25,7 +25,6 @@ struct prova *remover_prova(struct prova *agenda, int *quantidade_provas);
 void pesquisa_data(struct prova *agenda, int quantidade_provas);
 void pesquisa_desc(struct prova *agenda, int quantidade_provas);
 
-
 int check_data(struct data data_a_checar);
 int compara_data(struct data data1, struct data data2);
 int valida_horario(struct horario hora_a_checar);
@@ -33,3 +32,4 @@ int compara_horario(struct horario hora_ini, struct horario hora_fim);
 int sobrepoe_horario(struct prova *agenda, int n_provas, struct prova prova_nova);
 void limpa_buffer();
 char* to_lower(char *str);
+void ordena_agenda(struct prova *agenda, int quantidade_provas);

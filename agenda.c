@@ -256,3 +256,23 @@ char* to_lower(char *str){
     }
     return str;
 }
+
+void ordena_agenda(struct prova *agenda, int quantidade_provas){
+    if(agenda == NULL || quantidade_provas <= 0){
+        return;
+    }
+    for(int i = 0; i < quantidade_provas - 1; i++){
+        int menor_idx = i;
+
+        for(int j = i + 1; j < quantidade_provas; j++){
+            if(agenda[i].data.ano > agenda[j].data.ano || (agenda[i].data.ano == agenda[j].data.ano && agenda[i].data.mes > agenda[j].data.mes) || (agenda[i].data.ano == agenda[j].data.ano && agenda[i].data.mes == agenda[j].data.mes && agenda[i].data.dia > agenda[j].data.dia) || (compara_data(agenda[i].data,agenda[j].data) == 1 && agenda[i].horario_ini.hora > agenda[j].horario_ini.hora) || (compara_data(agenda[i].data,agenda[j].data) == 1 && agenda[i].horario_ini.hora == agenda[j].horario_ini.hora && agenda[i].horario_ini.minuto > agenda[j].horario_ini.minuto)){
+                menor_idx = j;
+            }
+        }
+        if(menor_idx != i){
+            struct prova temp = agenda[i];
+            agenda[i] = agenda[menor_idx];
+            agenda[menor_idx] = temp;
+        }
+    }
+}
