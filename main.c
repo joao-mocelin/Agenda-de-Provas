@@ -108,6 +108,8 @@ int main(){
             break;
         
         case 5:
+            printf("\nPesquisa por Descrição.\n");
+            pesquisa_desc(provas,quant_provas);
             break;
 
         case 0:

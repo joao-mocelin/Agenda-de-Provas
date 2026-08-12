@@ -212,3 +212,47 @@ int compara_data(struct data data1, struct data data2){ //return 1 == datas igua
     }
     return 0;
 }
+
+void pesquisa_desc(struct prova *agenda, int quantidade_provas){
+    if(agenda == NULL || quantidade_provas <= 0){
+        printf("\nNão há provas cadastradas.\n");
+        system("pause");
+        return;
+    }
+    char termo[99], desc_temp[150];
+    int flag = 0;
+    printf("\nInsira a palavra-chave para busca:\n-> ");
+    scanf(" %98[^\n]", termo);
+    limpa_buffer();
+    to_lower(termo);
+    for(int i = 0; i < quantidade_provas; i++){
+        strcpy(desc_temp, agenda[i].desc);
+        to_lower(desc_temp);
+        if(strstr(desc_temp, termo) != NULL){
+            flag = 1;
+            printf("\n%d Data: %02d %02d %04d", i + 1, agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano);
+            printf("\n  Horário de início: %02d %02d",agenda[i].horario_ini.hora,agenda[i].horario_ini.minuto);
+            printf("\n  Horário de término: %02d %02d",agenda[i].horario_fim.hora,agenda[i].horario_fim.minuto);
+            printf("\n  Descrição: %s",agenda[i].desc);
+            printf("\n  Local: %s\n",agenda[i].local);
+        }
+    }
+    if(flag == 0){
+        printf("\nNão foram encontrados resultados.\n");
+        system("pause");
+        return;
+    }
+    system("pause");
+}
+
+char* to_lower(char *str){
+    if(str == NULL){
+        return NULL;
+    }
+    for(int i = 0; str[i] != '\0'; i++){
+        if(str[i] >= 'A' && str[i] <= 'Z'){
+            str[i] = str[i] + 32;
+        }
+    }
+    return str;
+}
