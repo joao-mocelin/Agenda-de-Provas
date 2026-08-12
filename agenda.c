@@ -130,7 +130,7 @@ void mostra_provas(struct prova *agenda, int quantidade_provas){
         return;
     }
     for(int i = 0; i < quantidade_provas; i++){
-        printf("\n%d Data: %02d %02d %02d", i + 1, agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano);
+        printf("\n%d Data: %02d %02d %04d", i + 1, agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano);
         printf("\n  Horário de início: %02d %02d",agenda[i].horario_ini.hora,agenda[i].horario_ini.minuto);
         printf("\n  Horário de término: %02d %02d",agenda[i].horario_fim.hora,agenda[i].horario_fim.minuto);
         printf("\n  Descrição: %s",agenda[i].desc);
@@ -174,4 +174,41 @@ struct prova *remover_prova(struct prova *agenda, int *quantidade_provas){
     printf("\nProva removida com sucesso.\n");
     system("pause");
     return copia;
+}
+
+void pesquisa_data(struct prova *agenda, int quantidade_provas){
+    if(agenda == NULL || quantidade_provas <= 0){
+        printf("\nNão há provas cadastradas.\n");
+        system("pause");
+        return;
+    }
+    struct data data_pesquisa = {0,0,0};
+    do{
+        printf("\nInsira o dia:\n");
+        scanf("%d",&data_pesquisa.dia);
+        limpa_buffer();
+        printf("\nInsira o mês:\n");
+        scanf("%d",&data_pesquisa.mes);
+        limpa_buffer();
+        printf("\nInsira o ano:\n");
+        scanf("%d",&data_pesquisa.ano);
+        limpa_buffer();
+    }while(check_data(data_pesquisa) != 0);
+    for(int i = 0; i < quantidade_provas; i++){
+        if(compara_data(agenda[i].data, data_pesquisa) == 1){
+            printf("\n%d Data: %02d %02d %04d", i + 1, agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano);
+            printf("\n  Horário de início: %02d %02d",agenda[i].horario_ini.hora,agenda[i].horario_ini.minuto);
+            printf("\n  Horário de término: %02d %02d",agenda[i].horario_fim.hora,agenda[i].horario_fim.minuto);
+            printf("\n  Descrição: %s",agenda[i].desc);
+            printf("\n  Local: %s\n",agenda[i].local);
+        }
+    }
+    system("pause");
+}
+
+int compara_data(struct data data1, struct data data2){ //return 1 == datas iguais; return 0 == datas diferentes
+    if(data1.ano == data2.ano && data1.mes == data2.mes && data1.dia == data2.dia){
+        return 1;
+    }
+    return 0;
 }

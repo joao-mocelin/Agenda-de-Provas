@@ -103,6 +103,8 @@ int main(){
             break;
         
         case 4:
+            printf("\nPesquisa por Data.\n");
+            pesquisa_data(provas,quant_provas);
             break;
         
         case 5:
